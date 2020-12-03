@@ -1,0 +1,9 @@
+# project
+.vscode/
+
+# build
+*.out
+*.o
+
+bin/
+obj/
