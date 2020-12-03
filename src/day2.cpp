@@ -9,6 +9,7 @@ void Day2::run() {
     std::string value;
 
     int count = 0;
+    int count_valid = 0;
     while (file >> verif >> chara >> value) {
         std::stringstream ss(verif); 
         int min, max;
@@ -28,9 +29,16 @@ void Day2::run() {
         if (count_chara <= max && count_chara >= min)
             count++;
 
+        bool first = value[min - 1] == c;
+        bool second = value[max - 1] == c;
+        if ((first || second) && !(first && second))
+        {
+            count_valid++;
+        }
 
     }
     std::cout << "res : " << count << std::endl;
+    std::cout << "res 2 : " << count_valid << std::endl;
 
     file.close();
 }
