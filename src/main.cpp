@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include "test.h"
+#include "day1.h"
 
 int main(void) {
-    Test t(100);
-    std::cout << t.get_value() << std::endl;
+    Day1 d;
+    d.run();
 }
