@@ -36,6 +36,9 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Passport& p);
 };
 
+#ifndef OVERLOAD
+#define OVERLOAD
+
 std::ostream& operator<<(std::ostream& os, const Passport& p) {
     os << "byr:" << p.byr << std::endl;
     os << "iyr:" << p.iyr << std::endl;
@@ -47,3 +50,5 @@ std::ostream& operator<<(std::ostream& os, const Passport& p) {
     os << "cid:" << p.cid << std::endl;
     return os;
 }
+
+#endif

@@ -3,6 +3,10 @@
 void Day1::run() {
     std::ifstream file;
     file.open("inputs/input_d1.txt");
+    if (!file.is_open()) {
+        std::cout << "couldn't open file" << std::endl;
+        return;
+    }
 
     std::vector<int> values;
     int value;
