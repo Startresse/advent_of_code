@@ -17,3 +17,6 @@ cp template/day0.h src/day$1.h
 
 sed -i -e "s/0/$1/g" src/day$1.cpp
 sed -i -e "s/0/$1/g" src/day$1.h
+
+echo "Creation of day$1 files OK!"
+exit 0
