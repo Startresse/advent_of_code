@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <vector>
+#include <algorithm>
 
 class Day6 {
     private:
