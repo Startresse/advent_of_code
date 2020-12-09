@@ -19,4 +19,7 @@ sed -i -e "s/0/$1/g" src/day$1.cpp
 sed -i -e "s/0/$1/g" src/day$1.h
 
 echo "Creation of day$1 files OK!"
+
+code src/day$1.*
+
 exit 0
