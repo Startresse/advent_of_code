@@ -8,7 +8,8 @@ void Day7::run() {
         return;
     }
 
-    std::cout << "Day 7 OK!" << std::endl;
+    std::map<std::string, std::string> contained;
+    std::map<std::string, std::pair<std::string, int>> contains;
 
     file.close();
 }
