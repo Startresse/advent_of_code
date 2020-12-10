@@ -11,7 +11,7 @@
 #include "day9.h"
 #include "day10.h"
 
-int main(void) {
-    Day10 d;
+int main(const int argc, const char** argv) {
+    Day10 d(argc, argv);
     d.run();
 }
