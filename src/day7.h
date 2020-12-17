@@ -12,6 +12,8 @@ class Day7 {
     private:
         const char* filename = "inputs/input_d7.txt";
 
+        std::string target = "shinygoldbag";
+
         std::map<std::string, std::vector<std::string>> parents;
         std::map<std::string, std::vector<std::pair<std::string, int>>> childs;
 
@@ -21,5 +23,7 @@ class Day7 {
                 filename = argv[1];
         }
 
+
+        bool found(std::string);
         void run();
 };
