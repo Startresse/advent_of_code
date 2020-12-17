@@ -1,10 +1,12 @@
 #include "day12.h"
 
+
 cadran_dir c2d(char l) {
     if (l == 'N') return NORTH;
     if (l == 'S') return SOUTH;
     if (l == 'E') return EAST;
     if (l == 'W') return WEST;
+    exit(1);
 }
 
 void Day12::run() {
@@ -38,7 +40,7 @@ void Day12::run() {
             break;
         
         default:
-            s.go(val, c2d(L));
+            s.mv_wp(val, c2d(L));
             break;
         }
     }
@@ -48,24 +50,39 @@ void Day12::run() {
 }
 
 void Ship::go(int v) {
-    go(v, direction);
+    x += v * way_x;
+    y += v * way_y;
 }
 
-void Ship::go(int v, cadran_dir d)
+void Ship::turn(dir d) {
+    int _x = way_x;
+    int _y = way_y;
+    if (d == LEFT) {
+        way_x = -_y;
+        way_y = _x;
+    }
+    if (d == RIGHT) {
+        way_x = _y;
+        way_y = -_x;
+    }
+}
+
+
+void Ship::mv_wp(int v, cadran_dir d)
 {
     switch (d)
     {
     case NORTH:
-        y += v;
+        way_y += v;
         break;
     case EAST:
-        x += v;
+        way_x += v;
         break;
     case SOUTH:
-        y -= v;
+        way_y -= v;
         break;
     case WEST:
-        x -= v;
+        way_x -= v;
         break;
     
     default:
