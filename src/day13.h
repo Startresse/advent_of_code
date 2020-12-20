@@ -2,6 +2,11 @@
 
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <cassert>
+#include <boost/integer/mod_inverse.hpp>
 
 class Day13 {
 private:
