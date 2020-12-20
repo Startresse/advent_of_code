@@ -1,15 +1,24 @@
 #include "day7.h"
 
 
-bool Day7::found(std::string parent) {
-    for (auto s : parents[parent]) {
-        if (s == target || found(s))
+bool Day7::contain(std::string parent) {
+    for (auto v : contains[parent]) {
+        if (v.first == target || contain(v.first))
             return true;
     }
     return false;
 }
 
+int Day7::count_bags(std::string parent) {
+    int res = 1;
+    for (auto v : contains[parent]) {
+        res += v.second * count_bags(v.first);
+    }
+    return res;
+}
+
 void Day7::run() {
+    // file handling
     std::ifstream file;
     file.open(filename);
     if (!file.is_open()) {
@@ -17,52 +26,50 @@ void Day7::run() {
         return;
     }
 
-    std::vector<std::string> lines;
+    // parsing tools
     std::string line;
+    std::string v[3];
+    int nb;
+
     while(getline(file, line)){
-        lines.push_back(line);
-    }
-    file.close();
+        std::stringstream ss(line);
 
-
-    for(auto s : lines) {
-        std::stringstream ss(s);
-
-        std::string v[3];
+        // parent : first bag of the line
         ss >> v[0] >> v[1] >> v[2];
-        std::string container = v[0] + v[1] + v[2];
-        container.erase(container.end() - 1);
+        std::string parent = v[0] + v[1] + v[2];
+
+        // remove finishing 's'
+        parent.erase(parent.end() - 1);
 
         // skip contains
         ss >> v[0];
 
-        // std::cout << container << std::endl;
-        int nb;
         while(ss >> nb >> v[0] >> v[1] >> v[2])
         {
-            std::string bag = v[0] + v[1] + v[2];
-            while (bag[bag.size() - 1] == '.' || bag[bag.size() - 1] == ',' || bag[bag.size() - 1] == 's')
-                bag.erase(bag.end() - 1);
-
-    //         // std::cout << "> " << nb << " : " << bag << std::endl;
-
-            std::vector<std::string>& parent_list = parents[bag];
-            if (std::find(parent_list.begin(), parent_list.end(), container) == parent_list.end()) {
-                parent_list.push_back(container);
+            std::string child = v[0] + v[1] + v[2];
+            while (child[child.size() - 1] == '.' ||
+                   child[child.size() - 1] == ',' ||
+                   child[child.size() - 1] == 's')
+            {
+                child.erase(child.end() - 1);
             }
 
-            // std::vector<std::pair<std::string, int>>& child_list = childs[container];
-            // child_list.push_back(std::make_pair(bag, nb));
+            contains[parent].push_back(std::make_pair(child, nb));
         }
-
     }
+    file.close();
 
+    // PART 1
     int res = 0;
-    for (auto p : parents)
-    {
-        if (found(p.first))
+    for (auto s : contains) {
+        if (contain(s.first)) {
             res++;
+        }
     }
-    std::cout << res << std::endl;
+    // std::cout << res << std::endl;
+
+    // PART 2
+    std::cout << count_bags(target) - 1 << std::endl;
+
 
 }

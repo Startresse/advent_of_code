@@ -14,14 +14,16 @@ class Day7 {
 
         std::string target = "shinygoldbag";
 
-        std::map<std::string, std::vector<std::string>> parents;
-        std::map<std::string, std::vector<std::pair<std::string, int>>> childs;
+        std::map<std::string, std::vector<std::pair<std::string, int>>> contains;
 
     public:
         Day7(const int argc, const char** argv) {
             if (argc > 1)
                 filename = argv[1];
         }
+
+        bool contain(std::string parent);
+        int count_bags(std::string);
 
 
         bool found(std::string);
